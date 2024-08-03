@@ -19,6 +19,9 @@
                         {{ __('Tags') }}
                     </x-nav-link>
                     @endif
+                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                        {{ __('About') }}
+                    </x-nav-link>
                     <x-nav-link :href="route('home')" :active="request()->routeIs('home')">
                         {{ __('Poems') }}
                     </x-nav-link>
