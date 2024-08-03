@@ -17,7 +17,7 @@
     </head>
     <body class="font-sans antialiased">
         <div class="min-h-screen bg-gray-100 dark:bg-gray-900" style="background-image: linear-gradient(to right, #DE87A1, #879DDE);">
-            @include('layouts.navigation')
+            <!-- @include('layouts.navigation') -->
 
             <!-- Page Heading -->
             @if (isset($header))
