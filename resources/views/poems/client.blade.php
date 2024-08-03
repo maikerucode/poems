@@ -30,6 +30,7 @@
                 @endif
         </div>
         <div class="max-w-2xl mx-auto sm:p-6 lg:p-8" style="margin-bottom: 18px; max-width: 50%;">
+            <br>
             <form action="">
                 <x-primary-button class="mt-2" style="filter: drop-shadow(1px 1px 1px #000000);">{{ __('Generate New Poem') }}</x-primary-button>
             </form>
