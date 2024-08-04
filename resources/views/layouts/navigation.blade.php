@@ -81,7 +81,13 @@
                 <x-responsive-nav-link :href="route('poems.index')" :active="request()->routeIs('poems.index')">
                     {{ __('Poem Creator') }}
                 </x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('tags.index')" :active="request()->routeIs('tags.index')">
+                    {{ __('Tags') }}
+                </x-responsive-nav-link>
             @endif
+            <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                {{ __('About') }}
+            </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('home')" :active="request()->routeIs('home')">
                 {{ __('Poems') }}
             </x-responsive-nav-link>
