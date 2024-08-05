@@ -14,7 +14,7 @@ class TagController extends Controller
     public function index(): View
     {
         return view('poems.tags', [
-            'tags' => Tag::latest()->paginate(2),
+            'tags' => Tag::latest()->paginate(10),
         ]);
     }
 

@@ -38,7 +38,7 @@ class PoemController extends Controller
     {
         
         return view('poems.index', [
-            'poems' => Poem::latest()->paginate(2),
+            'poems' => Poem::latest()->paginate(5),
         ]);
     }
 
@@ -97,6 +97,7 @@ class PoemController extends Controller
      */
     public function edit(Poem $poem): View
     {
+        dd(auth()->user()->is_user);
         Gate::authorize('update', $poem);
 
         $allTags = Tag::all();
