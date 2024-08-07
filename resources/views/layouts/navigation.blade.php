@@ -18,12 +18,15 @@
                     <x-nav-link :href="route('tags.index')" :active="request()->routeIs('tags.index')">
                         {{ __('Tags') }}
                     </x-nav-link>
-                    @endif
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('About') }}
                     </x-nav-link>
                     <x-nav-link :href="route('home')" :active="request()->routeIs('home')">
                         {{ __('Poems') }}
+                    </x-nav-link>
+                    @endif
+                    <x-nav-link :href="route('letters.index')" :active="request()->routeIs('letters.index')">
+                        {{ __('Letters') }}
                     </x-nav-link>
                 </div>
             </div>
@@ -88,8 +91,8 @@
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('About') }}
             </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('home')" :active="request()->routeIs('home')">
-                {{ __('Poems') }}
+            <x-responsive-nav-link :href="route('letters.index')" :active="request()->routeIs('letters.index')">
+                {{ __('Letters') }}
             </x-responsive-nav-link>
         </div>
 
