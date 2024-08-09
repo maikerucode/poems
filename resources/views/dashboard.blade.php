@@ -23,12 +23,13 @@
                 Welcome!
             </p>
             <p class="text-md mt-4 text-white" style="text-align: justify; text-justify: inter-word;">
-                It took quite a while to make but here it is!
+                Happy birthday babyy! It took quite a while to make but here it is!
 
                 <br><br>
 
                 Let me introduce you to your very own site to view poems! This site 
                 allows you to look through both old and new poems which I have created. I hope you enjoy every bit of it.
+                There is also a dedicated section that you can go to above for letters which your friends have written for you!
             </p>
 
             <p class="text-md mt-4 text-white" style="text-align: center;">
