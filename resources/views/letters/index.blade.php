@@ -1,6 +1,6 @@
 <x-app-layout>
     <div class="max-w-2xl mx-auto p-4 sm:p-6 lg:p-8">
-        @if (auth()->user()->email != 'alyssa@cutie_happybday.com')
+        @if (auth()->user()->email != 'alyssa_cutie@happybday.com')
             <form method="POST" action="{{ route('letters.store') }}">
                 @csrf
                 <input
@@ -58,7 +58,7 @@
                                 </x-dropdown>
                             @endif
                         </div>
-                        @if (auth()->user()->role != 'admin')
+                        @if (auth()->user()->email != 'alyssa_cutie@happybday.com')
                             <p class="mt-4 text-lg text-gray-900">{!! nl2br(e($letter->letter_body)) !!}</p>
                         @endif
                     </div>
