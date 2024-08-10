@@ -18,16 +18,17 @@
                     <x-nav-link :href="route('tags.index')" :active="request()->routeIs('tags.index')">
                         {{ __('Tags') }}
                     </x-nav-link>
+                    @elseif (auth()->check() && auth()->user()->email === 'alyssa_cutie@happybday.com')
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('About') }}
                     </x-nav-link>
                     <x-nav-link :href="route('home')" :active="request()->routeIs('home')">
                         {{ __('Poems') }}
                     </x-nav-link>
-                    @endif
                     <x-nav-link :href="route('letters.index')" :active="request()->routeIs('letters.index')">
                         {{ __('Letters') }}
                     </x-nav-link>
+                    @endif
                 </div>
             </div>
 
