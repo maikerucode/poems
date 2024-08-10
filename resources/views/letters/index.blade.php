@@ -58,7 +58,7 @@
                                 </x-dropdown>
                             @endif
                         </div>
-                        @if (auth()->user()->email != 'alyssa_cutie@happybday.com')
+                        @if (auth()->user()->email === 'alyssa_cutie@happybday.com')
                             <p class="mt-4 text-lg text-gray-900">{!! nl2br(e($letter->letter_body)) !!}</p>
                         @endif
                     </div>
