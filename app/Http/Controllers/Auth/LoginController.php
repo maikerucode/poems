@@ -20,6 +20,13 @@ class LoginController extends Controller
 
     use AuthenticatesUsers;
 
+    public function authenticate()
+    {
+        if (auth()->user()->email !== 'alyssa_cutie@happybday.com') {
+            auth()->logout();
+        }
+    }
+
     /**
      * Where to redirect users after login.
      *
