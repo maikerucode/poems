@@ -10,6 +10,7 @@
     </div> -->
 
     <div align="center">
+        @if (auth()->user()->email === 'alyssa_cutie@happybday.com')
         <div class="mobile-text max-w-2xl p-4 sm:p-6 lg:p-8" 
             style="
             border-radius: 10px; 
@@ -45,6 +46,26 @@
             </p>
             
         </div>
+        @else
+        <div class="mobile-text max-w-2xl p-4 sm:p-6 lg:p-8" 
+            style="
+            border-radius: 10px; 
+            background-image: linear-gradient(to right, #AB336B, #335BAB); 
+            margin: 20px 30px 0px; 
+            filter: drop-shadow(1px 3px 10px #000000);
+            ">
+            <p class="text-xl text-black-700 mt-1" style="color: white;">
+                Welcome back!
+            </p>
+            <p class="text-md mt-4 text-white" style="text-align: justify; text-justify: inter-word;">
+                Thank you for contributing to this gift for Alyssa!
+
+                <br><br>
+
+                While there isn't much remaining to do at the moment, do let me know if you've come by and anything seems off regarding the site. Thank you so much!
+            </p>
+        </div>
+        @endif
     </div>
 
 </x-app-layout>
