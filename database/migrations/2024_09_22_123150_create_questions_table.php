@@ -18,7 +18,7 @@ return new class extends Migration
             $table->integer('category_id');
             // $table->integer('temptest_id');
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
-            $table->foreign('temptest_id')->references('id')->on('temptests')->onDelete('cascade');
+            // $table->foreign('temptest_id')->references('id')->on('temptests')->onDelete('cascade');
             $table->timestamps();
         });
     }
