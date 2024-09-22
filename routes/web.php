@@ -5,6 +5,7 @@ use App\Http\Controllers\PoemController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TagController;
 use App\Http\Controllers\LetterController;
+use App\Http\Controllers\MockExamController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,7 +20,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home');
 });
 
 Route::get('/dashboard', function () {
@@ -50,6 +51,10 @@ Route::resource('tags', TagController::class)
 
 Route::resource('letters', LetterController::class)
     ->only(['index', 'store', 'edit', 'update', 'destroy'])
+    ->middleware(['auth', 'verified']);
+
+Route::get('/roadtorslp', [MockExamController::class, 'home'])
+    ->name('exam.home')
     ->middleware(['auth', 'verified']);
 
 require __DIR__.'/auth.php';
