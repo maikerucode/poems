@@ -21,6 +21,7 @@
     },
     "dependencies": {
         "bootstrap": "^5.3.3",
+        "flowbite": "^2.5.2",
         "jquery": "^3.7.1",
         "popper.js": "^1.16.1"
     }
