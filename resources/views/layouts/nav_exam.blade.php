@@ -31,6 +31,9 @@
                     <x-nav-link class="text-white" :href="route('exam.home')" :active="request()->routeIs('exam.home')">
                         {{ __('Home') }}
                     </x-nav-link>
+                    <x-nav-link class="text-white" :href="route('exam.import')" :active="request()->routeIs('exam.import')">
+                        {{ __('Home') }}
+                    </x-nav-link>
                 </div>
             </div>
 

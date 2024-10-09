@@ -6,6 +6,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TagController;
 use App\Http\Controllers\LetterController;
 use App\Http\Controllers\MockExamController;
+use App\Http\Controllers\PDFExtractController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -55,6 +56,14 @@ Route::resource('letters', LetterController::class)
 
 Route::get('/roadtorslp', [MockExamController::class, 'home'])
     ->name('exam.home')
+    ->middleware(['auth', 'verified']);
+
+Route::get('/roadtorslp/import', [PDFExtractController::class, 'home'])
+    ->name('exam.import')
+    ->middleware(['auth', 'verified']);
+
+Route::post('/roadtorslp/import/file_inp', [PDFExtractController::class, 'parseQuestions'])
+    ->name('exam.importQues')
     ->middleware(['auth', 'verified']);
 
 require __DIR__.'/auth.php';
