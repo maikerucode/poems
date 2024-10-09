@@ -9,8 +9,14 @@ class TempTest extends Model
 {
     use HasFactory;
 
+    protected $table = 'temptests';
+
+    protected $fillable = [
+        'title'
+    ];
+
     public function questions() {
-        return $this->belongsToMany(Question::class, 'temptestquestions', 'question_id', 'temptest_id');
+        return $this->belongsToMany(Question::class, 'temptestquestions', 'temptest_id', 'question_id');
     }
 
     public function categories() {

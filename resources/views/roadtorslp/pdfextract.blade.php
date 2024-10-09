@@ -17,8 +17,14 @@
                     file:bg-violet-50 file:text-violet-700
                     hover:file:bg-violet-100
                     "/>
+                <label for="categories" class="block mb-2 text-sm font-medium"></label>
+                <select id="categories" name="category" class="bg-pink-300 text-sm rounded-lg focus:ring-pink-400 focus:border-pink-400 block w-full p-2.5">
+                    @foreach ($categories as $category)
+                        <option value="{{ $category->id }}">{{ $category->category_name }}</option>
+                    @endforeach
+                </select>
                 </label>
-                <button type="submit" class="p-2.5 ms-2 text-sm font-medium text-white bg-pink-600 rounded-lg border border-pink-600 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 w-40 h-10">Generate Test</button>
+                <button type="submit" class="mt-3 p-2.5 ms-2 text-sm font-medium text-white bg-pink-600 rounded-lg border border-pink-600 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 w-40 h-10">Generate Test</button>
                 </form>
                 </div>
         </div>

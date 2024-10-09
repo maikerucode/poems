@@ -9,6 +9,12 @@ class Question extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'correct_ans',
+        'ques_body',
+        'category_id'
+    ];
+
     public function category() {
         return $this->belongsTo(Category::class)->as('category');
     }

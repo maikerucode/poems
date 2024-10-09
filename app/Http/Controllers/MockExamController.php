@@ -15,6 +15,7 @@ class MockExamController extends Controller
 
         $exam_date = Carbon::parse('2024-11-23');
         $date_now = Carbon::now();
+        $date_string = $date_now->format('F d, Y');
         $days_remaining = $exam_date->diffInDays($date_now);
         $days_remain = intval($days_remaining * -1);
 
@@ -22,6 +23,7 @@ class MockExamController extends Controller
         [
             'categories' => $categories,
             'remaining_days' => $days_remain,
+            'curr_date' => $date_string,
         ]
         );
     }
