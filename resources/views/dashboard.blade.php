@@ -8,7 +8,7 @@
             </div>
         </div>
     </div> -->
-
+    
     <div align="center">
         @if (auth()->user()->email === 'alyssa_cutie@happybday.com')
         <div class="mobile-text max-w-2xl p-4 sm:p-6 lg:p-8" 

@@ -20,6 +20,6 @@ class TempTest extends Model
     }
 
     public function categories() {
-        return $this->belongsToMany(Category::class, 'testcategories', 'temptest_id', 'category_id');
+        return $this->belongsToMany(Category::class, 'testcategories', 'temptest_id', 'category_id')->as('categories');
     }
 }

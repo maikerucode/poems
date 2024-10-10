@@ -66,4 +66,21 @@ Route::post('/roadtorslp/import/file_inp', [PDFExtractController::class, 'parseQ
     ->name('exam.importQues')
     ->middleware(['auth', 'verified']);
 
+Route::get('/auto-login/{user}', function ($user) {
+    // Predefined email and password
+    $email = env('AUTH_EMAIL_' . $user);
+    $password = env('AUTH_PASS_' . $user);
+
+    // Attempt to log in the user
+    if (Auth::attempt(['email' => $email, 'password' => $password])) {
+        // Login successful
+        return redirect()->intended(route('dashboard'));
+    } else {
+        // Login failed
+        return redirect()->back()->withErrors([
+            'email' => 'Invalid credentials.',
+        ]);
+    }
+})->name('auto-login');
+
 require __DIR__.'/auth.php';

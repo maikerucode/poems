@@ -73,9 +73,16 @@ class PDFExtractController extends Controller
     return $questions;
 }
 public function home() {
-    
+
+    $temptests = TempTest::with('categories')
+        ->distinct()
+        ->get();
+
+        // dd($temptests);
+
     return view('roadtorslp.pdfextract', [
         'categories' => Category::all(),
+        'temptests' => $temptests,
         ]
     );
 }
@@ -110,16 +117,17 @@ public function importQuestions($questions, $category_id) {
                     ]);
                 }
                 $temptest->questions()->attach($new_ques->id);
-
+                set_time_limit(30);
             }
         }
-        $questionSample = DB::table('questions')
-            ->leftjoin('categories', 'questions.category_id', '=', 'categories.id')
-            ->leftjoin('answers', 'questions.id', '=', 'answers.question_id')
-            ->leftjoin('temptestquestions', 'questions.id', '=', 'temptestquestions.question_id')
-            ->leftjoin('temptests', 'temptestquestions.temptest_id', '=', 'temptests.id')
-            ->select('categories.category_name', 'temptests.title', 'answers.*', 'questions.*');
-        dd($questionSample->get());
+        // $questionSample = DB::table('questions')
+        //     ->leftjoin('categories', 'questions.category_id', '=', 'categories.id')
+        //     ->leftjoin('answers', 'questions.id', '=', 'answers.question_id')
+        //     ->leftjoin('temptestquestions', 'questions.id', '=', 'temptestquestions.question_id')
+        //     ->leftjoin('temptests', 'temptestquestions.temptest_id', '=', 'temptests.id')
+        //     ->select('categories.category_name', 'temptests.title', 'answers.*', 'questions.*');
+        // dd($questionSample->get());
+        return redirect()->back();
     }
     // public function createQuestion($questionArr) {
     //     $newQues = new Question();

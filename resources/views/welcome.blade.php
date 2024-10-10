@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>🤍 My Gift to You 🤍</title>
+        <title>Welcome Page</title>
 
         <!-- Fonts -->
         <link href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
@@ -28,6 +28,12 @@
                         <a href="{{ url('/dashboard') }}" class="text-md text-gray-700 dark:text-gray-500 underline"><b>Dashboard</b></a>
                     @else
                         <a href="{{ route('login') }}" class="text-md text-white dark:text-white underline"><b>Log in</b></a>
+
+                        @if (env('APP_ENV') == 'local')
+                        <a href="{{ route('auto-login', ['user' => 'ALY']) }}" class="ml-4 text-md text-white dark:text-white underline"><b>Auto Login (Aly)</b></a>
+                        <a href="{{ route('auto-login', ['user' => 'USER']) }}" class="ml-4 text-md text-white dark:text-white underline"><b>Auto Login (User)</b></a>
+                        <a href="{{ route('auto-login', ['user' => 'ADMIN']) }}" class="ml-4 text-md text-white dark:text-white underline"><b>Auto Login (Admin)</b></a>
+                        @endif
 
                         @if (Route::has('register'))
                             <a href="{{ route('register') }}" class="ml-4 text-md text-white dark:text-white underline"><b>Register</b></a>
