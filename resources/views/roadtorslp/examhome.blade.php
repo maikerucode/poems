@@ -4,7 +4,7 @@
 
 <div class="container justify-content-center" align="center">
     <div class="card">
-        <div class="p-4 card-body w-1/2">
+        <div class="p-4 card-body w-3/4">
                 <h1 class="text-4xl font-bold text-left">{{ $curr_date }}</h1>
                 <p class="text-left text-gray-400">{{$remaining_days}} days until Board Exam Day 1</p>
                 <div class="p-4 my-1.5 card-body rounded-lg bg-pink-200 drop-shadow-md">
@@ -48,8 +48,49 @@
                             </div>
                         </div>
                         <div class="w-1/2 m-2 px-4 py-2 card-body rounded-lg border-2 bg-pink-100 drop-shadow-md">
-                            insert form to select previous test attempts (finished FinalTest)
-                        </div>
+                            <div class="mt-2 cursor-pointer">
+                                <div class="px-4 py-2 card-body rounded-lg bg-pink-300 drop-shadow-md flex justify-between">
+                                    <div class="text-sm truncate w-1/2">
+                                        Anaphy & Neuro0a0awdlkjnawoduihnawdi iuhawdiouawhd auidh aui
+                                    </div>
+                                    <div class="text-right text-xs">
+                                        <div>
+                                            Q2
+                                        </div>
+                                        <div>
+                                            hh:mm (hh:mm) remaining
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mt-1 flex flex-wrap">
+                                    <div class="ml-1 mt-1 rounded-full px-4 py-1 text-center text-2xs bg-pink-200 text-black">
+                                        Category
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mt-2">
+                                <div class="px-4 py-2 card-body rounded-lg bg-pink-300 drop-shadow-md flex justify-between">
+                                    <div class="text-sm truncate w-1/2">
+                                        Anaphy & Neuro0a0awdlkjnawoduihnawdi iuhawdiouawhd auidh aui
+                                    </div>
+                                    <div class="text-right text-xs">
+                                        <div>
+                                            Q2
+                                        </div>
+                                        <div>
+                                            Done (View Questions)
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mt-1 flex flex-wrap">
+                                    <div class="ml-1 mt-1 rounded-full px-4 py-1 text-center text-2xs bg-pink-200 text-black">
+                                        Category
+                                    </div>
+                                    <div class="ml-1 mt-1 rounded-full px-4 py-1 text-center text-2xs bg-pink-200 text-black">
+                                        Category
+                                    </div>
+                                </div>
+                            </div>
                     </div>
                 </div>
                 <!-- Dropdown menu -->
