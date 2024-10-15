@@ -4,7 +4,7 @@
 
 <div class="container justify-content-center" align="center">
     <div class="card">
-        <div class="p-4 card-body w-1/2">
+        <div class="p-4 card-body w-3/4">
                 <h1 class="text-4xl font-bold text-left">{{ $curr_date }}</h1>
                 <p class="text-left text-gray-400">{{$remaining_days}} days until Board Exam Day 1</p>
                 <div class="p-4 my-1.5 card-body rounded-lg bg-pink-200 drop-shadow-md">
@@ -34,11 +34,11 @@
                                         </table>
                                     </div>
                                     <div>                                        
-                                        <button id="dropdownDefaultButton" data-dropdown-toggle="dropdown" class="text-black bg-pink-300 hover:bg-pink-300 focus:ring-4 focus:outline-none focus:ring-pink-500 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center my-2" type="button">Select Time Limit <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
-                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
-                                        </svg>
-                                        </button>
                                         <div class="flex items-center">
+                                            <button id="dropdownDefaultButton" data-dropdown-toggle="dropdown" class="mr-2 text-black bg-pink-300 hover:bg-pink-300 focus:ring-4 focus:outline-none focus:ring-pink-500 font-medium rounded-lg text-xs px-5 py-2.5 text-center inline-flex items-center my-2 h-10" type="button">Select Time Limit <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
+                                            </svg>
+                                            </button>
                                             <input type="text" id="simple-search" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-40 ps-10 p-2.5 h-10" placeholder="# of Questions" required />
                                             <button id="generate_test" type="submit" class="p-2.5 ms-2 text-sm font-medium text-white bg-pink-600 rounded-lg border border-pink-600 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 w-40 h-10">Generate Test</button>
                                         </div>                                    
@@ -47,8 +47,49 @@
                             </div>
                         </div>
                         <div class="w-1/2 m-2 px-4 py-2 card-body rounded-lg border-2 bg-pink-100 drop-shadow-md">
-                            insert form to select previous test attempts (finished FinalTest)
-                        </div>
+                            <div class="mt-2 cursor-pointer">
+                                <div class="px-4 py-2 card-body rounded-lg bg-pink-300 drop-shadow-md flex justify-between">
+                                    <div class="text-sm truncate w-1/2">
+                                        Anaphy & Neuro0a0awdlkjnawoduihnawdi iuhawdiouawhd auidh aui
+                                    </div>
+                                    <div class="text-right text-xs">
+                                        <div>
+                                            Q2
+                                        </div>
+                                        <div>
+                                            hh:mm (hh:mm) remaining
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mt-1 flex flex-wrap">
+                                    <div class="ml-1 mt-1 rounded-full px-4 py-1 text-center text-2xs bg-pink-200 text-black">
+                                        Category
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mt-2">
+                                <div class="px-4 py-2 card-body rounded-lg bg-pink-300 drop-shadow-md flex justify-between">
+                                    <div class="text-sm truncate w-1/2">
+                                        Anaphy & Neuro0a0awdlkjnawoduihnawdi iuhawdiouawhd auidh aui
+                                    </div>
+                                    <div class="text-right text-xs">
+                                        <div>
+                                            Q2
+                                        </div>
+                                        <div>
+                                            Done (View Questions)
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mt-1 flex flex-wrap">
+                                    <div class="ml-1 mt-1 rounded-full px-4 py-1 text-center text-2xs bg-pink-200 text-black">
+                                        Category
+                                    </div>
+                                    <div class="ml-1 mt-1 rounded-full px-4 py-1 text-center text-2xs bg-pink-200 text-black">
+                                        Category
+                                    </div>
+                                </div>
+                            </div>
                     </div>
                 </div>
                 <!-- Dropdown menu -->

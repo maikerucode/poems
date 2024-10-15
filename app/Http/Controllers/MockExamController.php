@@ -42,4 +42,8 @@ class MockExamController extends Controller
                 'question' => $question
             ]);
     }
+
+    public function testEnd() {
+        return view('roadtorslp.testEnd');
+    }
 }
