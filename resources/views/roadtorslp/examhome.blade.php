@@ -16,14 +16,15 @@
                                 <p class="mx-2 text-lg align-text-bottom italic text-gray-400">(select topics)</p>
                             </div>
                             <div>
-                                <form action="{{ route('exam.makeTemp') }}" method="get">                                
+                                <form action="{{ route('exam.makeTemp') }}" method="post">
+                                    @csrf                             
                                     <div class="relative overflow-x-auto">
                                         <table class="w-full text-sm text-left bg-pink-100">
                                             <tbody>
                                                 @foreach ($categories as $category)
                                                 <tr class="bg-pink-100">
                                                     <td class="flex-shrink-0 max-w-fit py-2 px-2">
-                                                        <input type="checkbox" name="categories" id="">
+                                                        <input type="checkbox" name="categories[]" value="{{ $category->id }}">
                                                     </td>
                                                     <td class="flex-grow py-2 px-2">
                                                         {{$category->category_name}}
@@ -33,9 +34,11 @@
                                             </tbody>
                                         </table>
                                     </div>
-                                    <div>
+                                    <div class="flex justify-between">
                                         <input type="hidden" name="time_limit" id="selectedTimeLimit">                                        
-                                        <button id="dropdownDefaultButton" data-dropdown-toggle="dropdown" class="text-black bg-pink-300 hover:bg-pink-300 focus:ring-4 focus:outline-none focus:ring-pink-500 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center my-2" type="button">Select Time Limit <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                                        <button id="dropdownDefaultButton" data-dropdown-toggle="dropdown" class="mr-2 text-black bg-pink-300 hover:bg-pink-300 focus:ring-4 focus:outline-none focus:ring-pink-500 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center my-2 h-10" type="button">
+                                            <span id="selectedTime">Select Time Limit</span>     
+                                        <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
                                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
                                         </svg>
                                         </button>
@@ -48,71 +51,65 @@
                             </div>
                         </div>
                         <div class="w-1/2 m-2 px-4 py-2 card-body rounded-lg border-2 bg-pink-100 drop-shadow-md">
-                            <div class="mt-2 cursor-pointer">
-                                <div class="px-4 py-2 card-body rounded-lg bg-pink-300 drop-shadow-md flex justify-between">
-                                    <div class="text-sm truncate w-1/2">
-                                        Anaphy & Neuro0a0awdlkjnawoduihnawdi iuhawdiouawhd auidh aui
-                                    </div>
-                                    <div class="text-right text-xs">
-                                        <div>
-                                            Q2
+                            @foreach ($final_tests as $final_test)
+                                <a href="{{ route('exam.sampleQues', $final_test->id) }}" class="mt-2 cursor-pointer">
+                                    <div class="px-4 py-2 card-body rounded-lg bg-pink-300 drop-shadow-md flex justify-between">
+                                        <div class="text-sm truncate w-1/2">
+                                            {{ $final_test->temptest->title }}
                                         </div>
-                                        <div>
-                                            hh:mm (hh:mm) remaining
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="mt-1 flex flex-wrap">
-                                    <div class="ml-1 mt-1 rounded-full px-4 py-1 text-center text-2xs bg-pink-200 text-black">
-                                        Category
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="mt-2">
-                                <div class="px-4 py-2 card-body rounded-lg bg-pink-300 drop-shadow-md flex justify-between">
-                                    <div class="text-sm truncate w-1/2">
-                                        Anaphy & Neuro0a0awdlkjnawoduihnawdi iuhawdiouawhd auidh aui
-                                    </div>
-                                    <div class="text-right text-xs">
-                                        <div>
-                                            Q2
-                                        </div>
-                                        <div>
-                                            Done (View Questions)
+                                        <div class="text-right text-xs">
+                                            <div>
+                                                Q#{{ $final_test->current_ques + 1 }}
+                                            </div>
+                                            <div>
+                                                @php
+                                                    $currentDateTime = Carbon\Carbon::now();
+                                                    $difference = $currentDateTime->diff($final_test->end_time);
+                                                @endphp
+
+                                                @if ($difference->h)
+                                                    {{ $difference->h }} :
+                                                @endif
+                                                @if ($difference->i)
+                                                    {{ $difference->i }} :
+                                                @endif
+                                                @if ($difference->s)
+                                                    {{ $difference->s }}
+                                                @endif
+                                                remaining
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="mt-1 flex flex-wrap">
-                                    <div class="ml-1 mt-1 rounded-full px-4 py-1 text-center text-2xs bg-pink-200 text-black">
-                                        Category
+                                    <div class="mt-1 flex flex-wrap">
+                                        @foreach ($final_test->temptest->categories as $category)
+                                            <div class="ml-1 mt-1 rounded-full px-4 py-1 text-center text-2xs bg-pink-200 text-black">
+                                                {{$category->category_name}}
+                                            </div>
+                                        @endforeach
                                     </div>
-                                    <div class="ml-1 mt-1 rounded-full px-4 py-1 text-center text-2xs bg-pink-200 text-black">
-                                        Category
-                                    </div>
-                                </div>
-                            </div>
+                                </a>
+                            @endforeach
                     </div>
                 </div>
                 <!-- Dropdown menu -->
                 <div id="dropdown" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
                     <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDefaultButton">
                     <li>
-                        <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">1:00:00</a>
+                        <a href="#" class="drop-option block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" value="1:00:00">1:00:00</a>
                     </li>
                     <li>
-                        <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">1:30:00</a>
+                        <a href="#" class="drop-option block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" value="1:30:00">1:30:00</a>
                     </li>
                     <li>
-                        <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">2:00:00</a>
+                        <a href="#" class="drop-option block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" value="2:00:00">2:00:00</a>
                     </li>
                     <li>
-                        <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">No Limit</a>
+                        <a href="#" class="drop-option block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" value="No Limit">No Limit</a>
                     </li>
                     </ul>
                 </div>
         </div>
     </div>
 </div>
-@endsection
-
 @include('scripts.examhome')
+@endsection

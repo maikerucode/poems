@@ -17,6 +17,7 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body class="font-sans antialiased">
+        <script src="/assets/jquery.js"></script>
         <div class="min-h-screen bg-gray-100 dark:bg-gray-900" style="background: #FFFFFF">
             @include('layouts.nav_exam')
 

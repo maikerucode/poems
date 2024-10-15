@@ -9,7 +9,18 @@ class FinalTest extends Model
 {
     use HasFactory;
 
-    public function getTempTest() {
-        return $this->belongsTo(TempTest::class, 'temptest_id', 'id', 'temptests');
+    protected $table = 'finaltests';
+
+    protected $fillable = [
+        'temptest_id',
+        'status',
+        'is_graded',
+        'score',
+        'end_time',
+        'current_ques'
+    ];
+
+    public function temptest() {
+        return $this->belongsTo(TempTest::class, 'temptest_id', 'id');
     }
 }

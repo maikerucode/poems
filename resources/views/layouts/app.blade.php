@@ -16,6 +16,7 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body class="font-sans antialiased">
+        <script src="/assets/jquery.js"></script>
         <div class="min-h-screen bg-gray-100 dark:bg-gray-900" style="background-image: linear-gradient(to right, #DE87A1, #879DDE);">
             @include('layouts.navigation')
 

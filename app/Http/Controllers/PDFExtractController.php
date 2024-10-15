@@ -67,7 +67,7 @@ class PDFExtractController extends Controller
         $questions[] = $currentQuestion;
     }
 
-    if (preg_match('/^\d{1,2}[a-zA-Z](?:, \d{1,2}[a-zA-Z])*$/', $line)) {   
+    if (preg_match('/^\d{1,3}[a-zA-Z](?:, \d{1,3}[a-zA-Z])*$/', $line)) {   
         $pairs = explode(', ', $line);
         // dd($pairs);
         foreach ($pairs as $pair) {

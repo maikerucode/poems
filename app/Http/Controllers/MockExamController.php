@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\FinalTest;
 use App\Models\TempTest;
 use Illuminate\Support\Facades\DB;
@@ -23,52 +24,104 @@ class MockExamController extends Controller
         $days_remaining = $exam_date->diffInDays($date_now);
         $days_remain = intval($days_remaining * -1);
 
+        $final_tests = FinalTest::with('temptest')
+            ->get();
+
         return view('roadtorslp.examhome',
         [
             'categories' => $categories,
             'remaining_days' => $days_remain,
             'curr_date' => $date_string,
-        ]
+            'final_tests' => $final_tests
+            ]
         );
     }
 
-    public function singleQues() {
-        $question = Question::with('answers')
-        // ->distinct()
-        ->first();
+    public function singleQues($id) {
+        $finaltest = FinalTest::with('temptest.questions')->find($id);
+        $currentQuesID = $finaltest->current_ques;
+        $temptest_id = $finaltest->temptest_id;
 
-        // dd($question);
+        $questions = $finaltest->temptest->questions()
+        ->where('temptest_id', $temptest_id)
+        ->orderBy('ques_order')
+        ->get();
+
+        $question_count = $finaltest->temptest->questions()->count();
+
+        $currentQuestion = $questions->firstWhere('ques_order', $currentQuesID);
+
+        // dd($currentQuestion, $finaltest->end_time);
 
         return view('roadtorslp.questionPage',
             [
-                'question' => $question
+                'question_count'=> $question_count,
+                'finaltest' => $finaltest,
+                'question' => $currentQuestion,
+                'end_time' => $finaltest->end_time,
             ]);
+    }
+
+    public function updateExam(Request $request) {
+        
     }
 
     public function makeTempTest(Request $request) {
 
-        $categories = $request->input('categories');
         $time_limit = $request->input('time_limit');
-        $num_of_ques = $request->input('ques_num');
-        dd($categories, $time_limit, $num_of_ques);
+        $selectedCategories = $request->input('categories');
+        $n = $request->input('ques_num');
 
-        // $temptest = TempTest::create([
-        //     'category_id'
-        // ]);
+        $carbon_hourStr = null;
 
+        if ($time_limit == "2:00:00") {
+            $carbon_hourStr = Carbon::now()->addHours(2)->toDateTimeString();
+        } else if ($time_limit == "1:30:00") {
+            $carbon_hourStr = Carbon::now()->addHours(1)->addMinutes(30)->toDateTimeString();
+        } else if ($time_limit == "1:00:00") {
+            $carbon_hourStr = Carbon::now()->addHours(1)->toDateTimeString();
+        }
 
+        $questionsPerCategory = (int) floor($n / count($selectedCategories));
 
-    }
+        $finalQuestions = collect();
 
-    public function makeFinalTest(Request $request) {
+        $category_names = [];
+
+        foreach ($selectedCategories as $category_id) {
+            $questions = Question::with('answers')
+                ->where('category_id', $category_id)
+                ->inRandomOrder()
+                ->limit($questionsPerCategory)
+                ->get();
+            
+            $category_names[] = Category::find($category_id)->category_name;
+            $finalQuestions = $finalQuestions->merge($questions);
+        }
+
+        $shuffledQuestions = $finalQuestions->shuffle();
+
+        $custom_temptest = TempTest::create([
+            'title' => implode('-', $category_names) . Carbon::now()->format('Y-m-d H:i:s')
+        ]);
+
+        foreach ($shuffledQuestions as $index => $question) {
+            $custom_temptest->questions()->attach($question->id, ['ques_order' => $index]);
+        }
+
+        foreach ($selectedCategories as $category_id) {
+            $custom_temptest->categories()->attach($category_id);
+        }
 
         $finaltest = FinalTest::create([
-            'temptest_id' => $request->input('temptest_id'),
+            'temptest_id' => $custom_temptest->id,
             'status' => 'pending',
             'is_graded' => false,
-            'score' => 0
+            'end_time' => $carbon_hourStr,
+            'score' => 0,
+            'current_ques' => 0,
         ]);
-        
-        return $finaltest;
+
+        return redirect()->back();
     }
 }

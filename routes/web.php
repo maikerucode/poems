@@ -58,7 +58,7 @@ Route::get('/roadtorslp', [MockExamController::class, 'home'])
     ->name('exam.home')
     ->middleware(['auth', 'verified']);
 
-Route::get('/roadtorslp/getQues', [MockExamController::class, 'singleQues'])
+Route::get('/roadtorslp/getQues/{id}', [MockExamController::class, 'singleQues'])
     ->name('exam.sampleQues')
     ->middleware(['auth', 'verified']);
 
