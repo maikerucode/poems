@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\FinalTest;
+use App\Models\TempTest;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
@@ -41,5 +43,32 @@ class MockExamController extends Controller
             [
                 'question' => $question
             ]);
+    }
+
+    public function makeTempTest(Request $request) {
+
+        $categories = $request->input('categories');
+        $time_limit = $request->input('time_limit');
+        $num_of_ques = $request->input('ques_num');
+        dd($categories, $time_limit, $num_of_ques);
+
+        // $temptest = TempTest::create([
+        //     'category_id'
+        // ]);
+
+
+
+    }
+
+    public function makeFinalTest(Request $request) {
+
+        $finaltest = FinalTest::create([
+            'temptest_id' => $request->input('temptest_id'),
+            'status' => 'pending',
+            'is_graded' => false,
+            'score' => 0
+        ]);
+        
+        return $finaltest;
     }
 }

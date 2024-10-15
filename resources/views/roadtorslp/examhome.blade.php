@@ -16,14 +16,14 @@
                                 <p class="mx-2 text-lg align-text-bottom italic text-gray-400">(select topics)</p>
                             </div>
                             <div>
-                                <form action="" method="get">                                
+                                <form action="{{ route('exam.makeTemp') }}" method="get">                                
                                     <div class="relative overflow-x-auto">
                                         <table class="w-full text-sm text-left bg-pink-100">
                                             <tbody>
                                                 @foreach ($categories as $category)
                                                 <tr class="bg-pink-100">
                                                     <td class="flex-shrink-0 max-w-fit py-2 px-2">
-                                                        <input type="checkbox" name="" id="">
+                                                        <input type="checkbox" name="categories" id="">
                                                     </td>
                                                     <td class="flex-grow py-2 px-2">
                                                         {{$category->category_name}}
@@ -33,14 +33,15 @@
                                             </tbody>
                                         </table>
                                     </div>
-                                    <div>                                        
+                                    <div>
+                                        <input type="hidden" name="time_limit" id="selectedTimeLimit">                                        
                                         <button id="dropdownDefaultButton" data-dropdown-toggle="dropdown" class="text-black bg-pink-300 hover:bg-pink-300 focus:ring-4 focus:outline-none focus:ring-pink-500 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center my-2" type="button">Select Time Limit <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
                                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
                                         </svg>
                                         </button>
                                         <div class="flex items-center">
-                                            <input type="text" id="simple-search" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-40 ps-10 p-2.5 h-10" placeholder="# of Questions" required />
-                                            <button id="generate_test" type="submit" class="p-2.5 ms-2 text-sm font-medium text-white bg-pink-600 rounded-lg border border-pink-600 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 w-40 h-10">Generate Test</button>
+                                            <input type="text" id="simple-search" name="ques_num" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-40 ps-10 p-2.5 h-10" placeholder="# of Questions" required />
+                                            <button type="submit" class="p-2.5 ms-2 text-sm font-medium text-white bg-pink-600 rounded-lg border border-pink-600 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 w-40 h-10">Generate Test</button>
                                         </div>                                    
                                     </div>
                                 </form>
@@ -72,3 +73,5 @@
     </div>
 </div>
 @endsection
+
+@include('scripts.examhome')

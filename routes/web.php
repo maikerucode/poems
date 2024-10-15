@@ -70,6 +70,11 @@ Route::post('/roadtorslp/import/file_inp', [PDFExtractController::class, 'parseQ
     ->name('exam.importQues')
     ->middleware(['auth', 'verified']);
 
+Route::post('/roadtorslp/maketemptest', [MockExamController::class, 'makeTempTest'])
+    ->name('exam.makeTemp')
+    ->middleware(['auth', 'verified']);
+
+
 Route::get('/auto-login/{user}', function ($user) {
     // Predefined email and password
     $email = env('AUTH_EMAIL_' . $user);
