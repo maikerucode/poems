@@ -67,6 +67,18 @@ class PDFExtractController extends Controller
         $questions[] = $currentQuestion;
     }
 
+    if (preg_match('/^\d{1,2}[a-zA-Z](?:, \d{1,2}[a-zA-Z])*$/', $line)) {   
+        $pairs = explode(', ', $line);
+        // dd($pairs);
+        foreach ($pairs as $pair) {
+            $number = intval($pair) - 1;
+            $letter = substr($pair, -1);
+            $letterIndex = ord($letter) - ord('A');
+            $questions[$number]['correct_ans'] = $letterIndex;
+            // dd($number, $letterIndex);
+        }
+    }
+
     File::delete($filePath);
     // dd($questions);
     $this->importQuestions($questions, $category_id);
@@ -110,11 +122,15 @@ public function importQuestions($questions, $category_id) {
                 $new_ques = Question::create($validatedData->validated());
                 $answers = $question['answers'];
                 
-                foreach ($answers as $answer) {
+                foreach ($answers as $key => $answer) {
                     $newAnswer = Answer::create([
                         'answer_text' => $answer, 
                         'question_id' => $new_ques->id
                     ]);
+                    if ($key == $question['correct_ans']) {
+                        $new_ques->correct_ans = $newAnswer->id;
+                        $new_ques->save();
+                    }
                 }
                 $temptest->questions()->attach($new_ques->id);
                 set_time_limit(30);

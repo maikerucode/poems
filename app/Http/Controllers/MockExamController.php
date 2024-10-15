@@ -6,6 +6,8 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 
+use App\Models\Question;
+
 class MockExamController extends Controller
 {
     public function home() {
@@ -26,5 +28,18 @@ class MockExamController extends Controller
             'curr_date' => $date_string,
         ]
         );
+    }
+
+    public function singleQues() {
+        $question = Question::with('answers')
+        // ->distinct()
+        ->first();
+
+        // dd($question);
+
+        return view('roadtorslp.questionPage',
+            [
+                'question' => $question
+            ]);
     }
 }
