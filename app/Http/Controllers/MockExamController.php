@@ -83,7 +83,7 @@ class MockExamController extends Controller
             $finaltest->score = $finaltest->score + 1;
         }
         
-        if ($finaltest->current_ques < $question_count) {
+        if ($finaltest->current_ques < ($question_count - 1)) {
             $finaltest->current_ques = $finaltest->current_ques + 1;
         } else {
             $finaltest->is_graded = true;
