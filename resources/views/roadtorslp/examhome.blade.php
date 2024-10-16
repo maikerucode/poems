@@ -53,20 +53,27 @@
                         <div class="w-1/2 m-2 px-4 py-2 card-body rounded-lg border-2 bg-pink-100 drop-shadow-md">
                             @foreach ($final_tests as $final_test)
                                 <a href="{{ route('exam.sampleQues', $final_test->id) }}" class="mt-2 cursor-pointer">
-                                    <div class="px-4 py-2 card-body rounded-lg bg-pink-300 drop-shadow-md flex justify-between">
+                                    <div class="mt-2 px-4 py-2 card-body rounded-lg bg-pink-300 drop-shadow-md flex justify-between">
                                         <div class="text-sm truncate w-1/2">
                                             {{ $final_test->temptest->title }}
                                         </div>
                                         <div class="text-right text-xs">
+                                            @php
+                                                $currentDateTime = Carbon\Carbon::now();
+                                                $difference = $currentDateTime->diff($final_test->end_time);
+                                                $num_of_ques = $final_test->temptest->questions()->count();
+                                            @endphp
+                                            
                                             <div>
-                                                Q#{{ $final_test->current_ques + 1 }}
+                                                @if (!$difference->invert)
+                                                    Q#{{ $final_test->current_ques + 1 }}
+                                                @else
+                                                    Time's Up! 
+                                                @endif
                                             </div>
                                             <div>
-                                                @php
-                                                    $currentDateTime = Carbon\Carbon::now();
-                                                    $difference = $currentDateTime->diff($final_test->end_time);
-                                                @endphp
 
+                                            @if (!$difference->invert)
                                                 @if ($difference->h)
                                                     {{ $difference->h }} :
                                                 @endif
@@ -77,6 +84,9 @@
                                                     {{ $difference->s }}
                                                 @endif
                                                 remaining
+                                            @else
+                                                Score: {{ $final_test->score }}/{{ $num_of_ques }}
+                                            @endif
                                             </div>
                                         </div>
                                     </div>

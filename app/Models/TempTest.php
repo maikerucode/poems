@@ -16,7 +16,7 @@ class TempTest extends Model
     ];
 
     public function questions() {
-        return $this->belongsToMany(Question::class, 'temptestquestions', 'temptest_id', 'question_id');
+        return $this->belongsToMany(Question::class, 'temptestquestions', 'temptest_id', 'question_id')->withPivot('ques_order');
     }
 
     public function categories() {

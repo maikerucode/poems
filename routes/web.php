@@ -62,6 +62,10 @@ Route::get('/roadtorslp/getQues/{id}', [MockExamController::class, 'singleQues']
     ->name('exam.sampleQues')
     ->middleware(['auth', 'verified']);
 
+Route::post('/roadtorslp/nextQues/', [MockExamController::class, 'nextQues'])
+    ->name('exam.nextQues')
+    ->middleware(['auth', 'verified']);
+
 Route::get('/roadtorslp/import', [PDFExtractController::class, 'home'])
     ->name('exam.import')
     ->middleware(['auth', 'verified']);
@@ -70,7 +74,7 @@ Route::post('/roadtorslp/import/file_inp', [PDFExtractController::class, 'parseQ
 ->name('exam.importQues')
 ->middleware(['auth', 'verified']);
 
-Route::get('/roadtorslp/end', [MockExamController::class, 'testEnd'])
+Route::get('/roadtorslp/end/{id}', [MockExamController::class, 'testEnd'])
     ->name('exam.testEnd')
     ->middleware(['auth', 'verified']);
     

@@ -39,6 +39,12 @@ class MockExamController extends Controller
 
     public function singleQues($id) {
         $finaltest = FinalTest::with('temptest.questions')->find($id);
+        
+        $date_now = Carbon::now();
+        if ($date_now > $finaltest->end_time || $finaltest->is_graded) {
+            return redirect()->route('exam.testEnd', $finaltest->id);
+        }
+        
         $currentQuesID = $finaltest->current_ques;
         $temptest_id = $finaltest->temptest_id;
 
@@ -48,10 +54,9 @@ class MockExamController extends Controller
         ->get();
 
         $question_count = $finaltest->temptest->questions()->count();
+        
+        $currentQuestion = $questions[$currentQuesID];
 
-        $currentQuestion = $questions->firstWhere('ques_order', $currentQuesID);
-
-        // dd($currentQuestion, $finaltest->end_time);
 
         return view('roadtorslp.questionPage',
             [
@@ -62,8 +67,32 @@ class MockExamController extends Controller
             ]);
     }
 
-    public function updateExam(Request $request) {
+    public function nextQues(Request $request) {
+        $isCorrect = $request->input('isCorrect');
+        $finaltest_id = $request->input('finaltest_id');
+        $finaltest = FinalTest::with('temptest.questions')->find($finaltest_id);
+
+        $date_now = Carbon::now();
+        if ($date_now > $finaltest->end_time) {
+            return redirect()->route('exam.testEnd', $finaltest->id);
+        }
+
+        $question_count = $finaltest->temptest->questions()->count();
         
+        if ($isCorrect == 'true') {
+            $finaltest->score = $finaltest->score + 1;
+        }
+        
+        if ($finaltest->current_ques < $question_count) {
+            $finaltest->current_ques = $finaltest->current_ques + 1;
+        } else {
+            $finaltest->is_graded = true;
+            $finaltest->save();
+            return redirect()->route('exam.testEnd', $finaltest->id);
+        }
+        
+        $finaltest->save();
+        return redirect()->route('exam.sampleQues', $finaltest_id);
     }
 
     public function makeTempTest(Request $request) {
@@ -123,5 +152,27 @@ class MockExamController extends Controller
         ]);
 
         return redirect()->back();
+    }
+
+    public function remakeTempTest($id) {
+        $finaltest = FinalTest::find($id);
+        $temptest = TempTest::find($finaltest->temptest_id);
+    }
+
+    public function testEnd($id) {
+        $finaltest = FinalTest::find($id);
+        $question_count = $finaltest->temptest->questions()->count();
+        $score = $finaltest->score;
+        $percentage = $score / $question_count;
+
+        return view('roadtorslp.testEnd',
+            [
+                'finaltest' => $finaltest,
+                'finish_time' => $finaltest->updated_at,
+                'end_time' => $finaltest->end_time,
+                'total_items' => $question_count,
+                'score' => $score,
+                'percentage'=> number_format($percentage * 100, 2) . '%'
+            ]);
     }
 }
