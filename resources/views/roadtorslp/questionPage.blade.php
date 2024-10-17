@@ -5,24 +5,14 @@
 <div class="container justify-content-center" align="center">
     <div class="card">
         <div class="p-4 card-body w-1/2">
-            <h1 class="text-4xl font-bold text-left">Question {{ $finaltest->current_ques + 1 }} of {{ $question_count }}</h1>
-            <div class="mt-1 flex justify-between">
-                <div class="flex">
-                    <p class="mr-1 text-lg align-text-bottom italic text-gray-400 text-left">Selected Topics: </p>
-                    <div class="flex">
-                        @foreach ($finaltest->temptest->categories as $category)
-                            <div class="ml-1 mt-1 rounded-full px-4 py-1 text-center text-xs bg-pink-200 text-black">
-                                {{$category->category_name}}
-                            </div>
-                        @endforeach
-                    </div>
-                </div>
+            <div class="flex justify-between">
+                <h1 class="text-4xl font-bold text-left">Question {{ $finaltest->current_ques + 1 }} of {{ $question_count }}</h1>
                 <div>
                 @php
                     $currentDateTime = Carbon\Carbon::now();
                     $difference = $currentDateTime->diff($finaltest->end_time);
                 @endphp
-                    <span id="rem_time" class="mr-1 text-lg align-text-bottom italic text-gray-400 text-left">
+                    <span id="rem_time" class="mr-1 text-lg align-text-bottom italic text-gray-400 text-left text-bottom">
                     @if (!$difference->invert)
                         Remaining Time:
                         @if ($difference->h)
@@ -38,6 +28,18 @@
                         Time's Up!
                     @endif
                     </span>
+                </div>
+            </div>
+            <div class="mt-1 flex justify-between">
+                <div class="flex">
+                    <p class="mr-1 text-lg align-text-bottom italic text-gray-400 text-left">Selected Topics: </p>
+                    <div class="flex flex-wrap">
+                        @foreach ($finaltest->temptest->categories as $category)
+                            <div class="ml-1 mt-1 rounded-full px-4 py-1 text-center text-xs bg-pink-200 text-black">
+                                {{$category->category_name}}
+                            </div>
+                        @endforeach
+                    </div>
                 </div>
             </div>
             <div class="p-4 my-1.5 card-body rounded-lg bg-pink-200 drop-shadow-md">
