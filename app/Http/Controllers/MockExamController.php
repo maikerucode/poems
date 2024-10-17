@@ -127,6 +127,16 @@ class MockExamController extends Controller
             $category_names[] = Category::find($category_id)->category_name;
             $finalQuestions = $finalQuestions->merge($questions);
         }
+        
+        if ($finalQuestions->count() < $n) {
+            $questions = Question::with('answers')
+            ->where('category_id', $selectedCategories[0])
+            ->inRandomOrder()
+            ->limit($n - $finalQuestions->count())
+            ->get();
+            
+            $finalQuestions = $finalQuestions->merge($questions);
+        }
 
         $shuffledQuestions = $finalQuestions->shuffle();
 
