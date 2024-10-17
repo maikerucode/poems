@@ -62,6 +62,10 @@ Route::get('/roadtorslp/getQues/{id}', [MockExamController::class, 'singleQues']
     ->name('exam.sampleQues')
     ->middleware(['auth', 'verified']);
 
+Route::get('/roadtorslp/checkQues/{id}', [MockExamController::class, 'checkQues'])
+    ->name('exam.checkQues')
+    ->middleware(['auth', 'verified']);
+
 Route::post('/roadtorslp/nextQues/', [MockExamController::class, 'nextQues'])
     ->name('exam.nextQues')
     ->middleware(['auth', 'verified']);

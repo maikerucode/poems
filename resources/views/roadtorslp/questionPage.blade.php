@@ -6,7 +6,7 @@
     <div class="card">
         <div class="p-4 card-body w-1/2">
             <div class="flex justify-between">
-                <h1 class="text-4xl font-bold text-left">Question {{ $finaltest->current_ques + 1 }} of {{ $question_count }}</h1>
+                <h1 class="text-4xl font-bold text-left">Question {{ $finaltest->current_ques + 1 }} of {{ $question_count }} [ID: {{ $question->id }}]</h1>
                 <div>
                 @php
                     $currentDateTime = Carbon\Carbon::now();

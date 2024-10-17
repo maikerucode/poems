@@ -185,4 +185,14 @@ class MockExamController extends Controller
                 'percentage'=> number_format($percentage * 100, 2) . '%'
             ]);
     }
+
+    public function checkQues($id) {
+        $question = Question::where('id','=', $id)->first();
+        $category = Category::where('id', $question->category_id)->first();
+        return view('roadtorslp.sampleQues',
+        [
+            'question' => $question,
+            'ques_category' => $category,
+        ]);
+    }
 }
