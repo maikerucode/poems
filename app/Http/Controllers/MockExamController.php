@@ -141,7 +141,7 @@ class MockExamController extends Controller
         $shuffledQuestions = $finalQuestions->shuffle();
 
         $custom_temptest = TempTest::create([
-            'title' => implode('-', $category_names) . Carbon::now()->format('Y-m-d H:i:s')
+            'title' => 'Test ' . Carbon::now()->format('Y-m-d H:i:s')
         ]);
 
         foreach ($shuffledQuestions as $index => $question) {

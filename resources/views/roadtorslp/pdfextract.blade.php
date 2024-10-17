@@ -37,7 +37,7 @@
                             <div class="flex justify-between mt-2 py-4 px-2 card-body rounded-lg bg-white drop-shadow-md">
                                 <h1 class="mt-3 flex-grow-0 ml-4 text-2xl font-bold text-left truncate"> {{ $temptest->title }} </h1>
                             </div>
-                        <div class="flex flex-row">
+                        <div class="flex flex-wrap">
                             @foreach ($temptest->categories as $category)
                             <div class="mr-2 mt-3">
                                 <div class="rounded-full px-4 py-1 text-center text-sm bg-pink-400 text-black">
