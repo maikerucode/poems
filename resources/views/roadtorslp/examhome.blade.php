@@ -54,8 +54,19 @@
                             @foreach ($final_tests as $final_test)
                                 <a href="{{ route('exam.sampleQues', $final_test->id) }}" class="mt-2 cursor-pointer">
                                     <div class="mt-2 px-4 py-2 card-body rounded-lg bg-pink-300 drop-shadow-md flex justify-between">
-                                        <div class="text-sm truncate w-1/2">
-                                            {{ $final_test->temptest->title }}
+                                        <div class="text-sm text-left truncate w-1/2">
+                                            <!-- {{ $final_test->temptest->title }} -->
+                                            @php
+                                                $originalString = $final_test->temptest->title; // Replace with the actual string
+                                                preg_match('/(\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2})/', $originalString, $matches);
+                                                $timeString = $matches[1];
+
+                                                $carbonTime = Carbon\Carbon::parse($timeString)->addHours(8);
+                                                $convertedTime = $carbonTime->format('Y-m-d H:i:s');
+
+                                                $convertedString = preg_replace('/(\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2})/', $convertedTime, $originalString);
+                                            @endphp
+                                            {{ $convertedString }}
                                         </div>
                                         <div class="text-right text-xs">
                                             @php
