@@ -55,7 +55,6 @@
                                 <a href="{{ route('exam.sampleQues', $final_test->id) }}" class="mt-2 cursor-pointer">
                                     <div class="mt-2 px-4 py-2 card-body rounded-lg bg-pink-300 drop-shadow-md flex justify-between">
                                         <div class="text-sm text-left truncate w-1/2">
-                                            <!-- {{ $final_test->temptest->title }} -->
                                             @php
                                                 $originalString = $final_test->temptest->title; // Replace with the actual string
                                                 preg_match('/(\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2})/', $originalString, $matches);
