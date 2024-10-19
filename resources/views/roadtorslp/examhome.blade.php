@@ -9,7 +9,7 @@
                 <p class="text-left text-gray-400">{{$remaining_days}} days until Board Exam Day 1</p>
                 <div class="p-4 my-1.5 card-body rounded-lg bg-pink-200 drop-shadow-md">
                     <h1 class="text-3xl font-bold text-left mx-1">What to do today?</h1>
-                    <div class="flex my-1">
+                    <div class="flex my-1 h-[600px]">
                         <div class="w-1/2 m-2 px-4 py-2 card-body rounded-lg bg-pink-100 drop-shadow-md">
                             <div class="flex">
                                 <p class="text-left text-lg font-bold">Practice Tests</p>
@@ -34,7 +34,7 @@
                                             </tbody>
                                         </table>
                                     </div>
-                                    <div class="flex justify-between">
+                                    <div class="flex justify-stretch">
                                         <input type="hidden" name="time_limit" id="selectedTimeLimit">                                        
                                         <button id="dropdownDefaultButton" data-dropdown-toggle="dropdown" class="mr-2 text-black bg-pink-300 hover:bg-pink-300 focus:ring-4 focus:outline-none focus:ring-pink-500 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center my-2 h-10" type="button">
                                             <span id="selectedTime">Select Time Limit</span>     
@@ -50,7 +50,7 @@
                                 </form>
                             </div>
                         </div>
-                        <div class="w-1/2 m-2 px-4 py-2 card-body rounded-lg border-2 bg-pink-100 drop-shadow-md">
+                        <div class="w-1/2 m-2 px-4 py-2 card-body rounded-lg border-2 bg-pink-100 drop-shadow-md max-h-screen overflow-y-auto">
                             @foreach ($final_tests as $final_test)
                                 <a href="{{ route('exam.sampleQues', $final_test->id) }}" class="mt-2 cursor-pointer">
                                     <div class="mt-2 px-4 py-2 card-body rounded-lg bg-pink-300 drop-shadow-md flex justify-between">
@@ -104,12 +104,13 @@
                                     </div>
                                     <div class="mt-1 flex flex-wrap">
                                         @foreach ($final_test->temptest->categories as $category)
-                                            <div class="ml-1 mt-1 rounded-full px-4 py-1 text-center text-2xs bg-pink-200 text-black">
+                                            <div class="ml-1 mt-2 rounded-full px-4 py-1 text-center text-2xs bg-pink-200 text-black shadow-md">
                                                 {{$category->category_name}}
                                             </div>
                                         @endforeach
                                     </div>
                                 </a>
+                                <div class="flex-grow border-t border-gray-300 mt-3"></div>
                             @endforeach
                     </div>
                 </div>
