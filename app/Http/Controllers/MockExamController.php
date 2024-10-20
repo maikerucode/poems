@@ -42,14 +42,8 @@ class MockExamController extends Controller
         $finaltest = FinalTest::with('temptest.questions')->find($id);
         
         $date_now = Carbon::now();
-        if ($finaltest->end_time) {
-            if ($date_now > $finaltest->end_time || $finaltest->is_graded) {
-                return redirect()->route('exam.testEnd', $finaltest->id);
-            }
-        } else {
-            if ($finaltest->is_graded) {
-                return redirect()->route('exam.testEnd', $finaltest->id);
-            }
+        if ($date_now > $finaltest->end_time || $finaltest->is_graded) {
+            return redirect()->route('exam.testEnd', $finaltest->id);
         }
         
         $currentQuesID = $finaltest->current_ques;
@@ -116,6 +110,8 @@ class MockExamController extends Controller
             $carbon_hourStr = Carbon::now()->addHours(1)->addMinutes(30)->toDateTimeString();
         } else if ($time_limit == "1:00:00") {
             $carbon_hourStr = Carbon::now()->addHours(1)->toDateTimeString();
+        } else {
+            $carbon_hourStr = Carbon::now()->addHours(96)->toDateTimeString();
         }
 
         $questionsPerCategory = (int) floor($n / count($selectedCategories));
