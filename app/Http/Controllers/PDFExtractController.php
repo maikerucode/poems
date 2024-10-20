@@ -88,6 +88,7 @@ public function home() {
 
     $temptests = TempTest::with('categories')
         ->distinct()
+        ->orderBy('created_at', 'desc')
         ->get();
 
         // dd($temptests);
