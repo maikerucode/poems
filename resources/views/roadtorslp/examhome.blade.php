@@ -82,7 +82,7 @@
                                                 @endif
                                             </div>
                                             <div>
-
+                                        @if(!$final_test->is_graded)
                                             @if ($final_test->end_time)
                                                 @if (!$difference->invert)
                                                     @if ($difference->h)
@@ -107,6 +107,9 @@
                                                     Score: {{ $final_test->score }}/{{ $num_of_ques }}
                                                 @endif
                                             @endif
+                                        @else
+                                            Score: {{ $final_test->score }}/{{ $num_of_ques }}
+                                        @endif
                                             </div>
                                         </div>
                                     </div>
