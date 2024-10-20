@@ -9,7 +9,7 @@
                 <p class="text-left text-gray-400">{{$remaining_days}} days until Board Exam Day 1</p>
                 <div class="p-4 my-1.5 card-body rounded-lg bg-pink-200 drop-shadow-md">
                     <h1 class="text-3xl font-bold text-left mx-1">What to do today?</h1>
-                    <div class="flex my-1 h-[600px]">
+                    <div class="flex my-1 h-[700px]">
                         <div class="w-1/2 m-2 px-4 py-2 card-body rounded-lg bg-pink-100 drop-shadow-md">
                             <div class="flex">
                                 <p class="text-left text-lg font-bold">Practice Tests</p>

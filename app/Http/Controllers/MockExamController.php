@@ -25,6 +25,7 @@ class MockExamController extends Controller
         $days_remain = intval($days_remaining * -1);
 
         $final_tests = FinalTest::with('temptest')
+            ->orderBy('created_at','desc')
             ->get();
 
         return view('roadtorslp.examhome',
