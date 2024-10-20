@@ -42,8 +42,14 @@ class MockExamController extends Controller
         $finaltest = FinalTest::with('temptest.questions')->find($id);
         
         $date_now = Carbon::now();
-        if ($date_now > $finaltest->end_time || $finaltest->is_graded) {
-            return redirect()->route('exam.testEnd', $finaltest->id);
+        if ($finaltest->end_time) {
+            if ($date_now > $finaltest->end_time || $finaltest->is_graded) {
+                return redirect()->route('exam.testEnd', $finaltest->id);
+            }
+        } else {
+            if ($finaltest->is_graded) {
+                return redirect()->route('exam.testEnd', $finaltest->id);
+            }
         }
         
         $currentQuesID = $finaltest->current_ques;

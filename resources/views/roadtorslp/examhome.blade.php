@@ -83,21 +83,29 @@
                                             </div>
                                             <div>
 
-                                            @if (!$difference->invert)
-                                                @if ($difference->h)
-                                                    {{ $difference->h }} :
+                                            @if ($final_test->end_time)
+                                                @if (!$difference->invert)
+                                                    @if ($difference->h)
+                                                        {{ $difference->h }} :
+                                                    @endif
+                                                    @if ($difference->i)
+                                                        {{ $difference->i }} :
+                                                    @endif
+                                                    @if ($difference->s)
+                                                        {{ $difference->s }}
+                                                    @endif
+                                                    remaining
+                                                @elseif ($final_test->is_graded)
+                                                    Score: {{ $final_test->score }}/{{ $num_of_ques }}        
+                                                @else
+                                                    Score: {{ $final_test->score }}/{{ $num_of_ques }}
                                                 @endif
-                                                @if ($difference->i)
-                                                    {{ $difference->i }} :
-                                                @endif
-                                                @if ($difference->s)
-                                                    {{ $difference->s }}
-                                                @endif
-                                                remaining
-                                            @elseif ($final_test->is_graded)
-                                                Score: {{ $final_test->score }}/{{ $num_of_ques }}        
                                             @else
-                                                Score: {{ $final_test->score }}/{{ $num_of_ques }}
+                                                @if ($final_test->is_graded)
+                                                    Score: {{ $final_test->score }}/{{ $num_of_ques }}        
+                                                @else
+                                                    Score: {{ $final_test->score }}/{{ $num_of_ques }}
+                                                @endif
                                             @endif
                                             </div>
                                         </div>
