@@ -16,6 +16,7 @@ class MockExamController extends Controller
     public function home() {
 
         $categories = DB::table('categories')
+        ->orderBy('category_name', 'asc')
         ->get();
 
         $exam_date = Carbon::parse('2024-11-23');
