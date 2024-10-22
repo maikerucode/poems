@@ -15,4 +15,13 @@
         });
     });
 
+    document.querySelectorAll('tr').forEach(row => {
+        row.addEventListener('click', event => {
+            if (event.target.tagName === 'TD') {
+                const checkbox = row.querySelector('input[type="checkbox"]');
+                checkbox.checked = !checkbox.checked;
+            }
+        });
+    });
+
 </script>
