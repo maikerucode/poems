@@ -76,7 +76,11 @@
                                             
                                             <div>
                                                 @if (!$difference->invert)
-                                                    Q#{{ $final_test->current_ques + 1 }}
+                                                    @if ((($final_test->current_ques + 1)  == $num_of_ques) &&($final_test->is_graded)) 
+                                                        Test Finished!
+                                                    @else
+                                                        Q#{{ $final_test->current_ques + 1 }}
+                                                    @endif
                                                 @else
                                                     Time's Up! 
                                                 @endif
