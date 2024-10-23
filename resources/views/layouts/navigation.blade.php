@@ -10,7 +10,7 @@
                 </div>
 
                 <!-- Navigation Links -->
-                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex select-none">
                     @if (auth()->check() && auth()->user()->role === 'admin')
                     <x-nav-link :href="route('poems.index')" :active="request()->routeIs('poems.index')">
                         {{ __('Poem Creator') }}

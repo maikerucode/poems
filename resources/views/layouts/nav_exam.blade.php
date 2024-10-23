@@ -20,14 +20,14 @@
         <div class="flex justify-between h-16">
             <div class="flex">
                 <!-- Logo -->
-                <div class=" text-white flex items-center text-xl">
+                <div class=" text-white flex items-center text-xl cursor-default select-none">
                     <strong>
                         CLEMENTE, RSLP
                     </strong>
                 </div>
 
                 <!-- Navigation Links -->
-                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex select-none">
                     <x-nav-link class="text-white" :href="route('exam.home')" :active="request()->routeIs('exam.home')">
                         {{ __('Home') }}
                     </x-nav-link>
