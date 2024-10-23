@@ -81,7 +81,10 @@ Route::post('/roadtorslp/import/file_inp', [PDFExtractController::class, 'parseQ
 Route::get('/roadtorslp/end/{id}', [MockExamController::class, 'testEnd'])
     ->name('exam.testEnd')
     ->middleware(['auth', 'verified']);
-    
+
+Route::get('/roadtorslp/retry/{id}', [MockExamController::class, 'retryTest'])
+->name('exam.testRetry')
+->middleware(['auth', 'verified']);
 
 Route::post('/roadtorslp/maketemptest', [MockExamController::class, 'makeTempTest'])
     ->name('exam.makeTemp')

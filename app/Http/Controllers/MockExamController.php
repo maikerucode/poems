@@ -199,4 +199,47 @@ class MockExamController extends Controller
             'ques_category' => $category,
         ]);
     }
+
+    public function retryTest($id, Request $request) {
+        $finaltest = FinalTest::find($id);
+        $questions = $finaltest->temptest->questions()->get();
+        $categories = $finaltest->temptest->categories()->get();
+        $attemptCount = FinalTest::where('temptest_id','=', $finaltest->temptest_id)->count();
+
+        $shuffledQuestions = $questions->shuffle();
+        $time_limit = $request->input('time_limit');
+
+        if ($time_limit == "2:00:00") {
+            $carbon_hourStr = Carbon::now()->addHours(2)->toDateTimeString();
+        } else if ($time_limit == "1:30:00") {
+            $carbon_hourStr = Carbon::now()->addHours(1)->addMinutes(30)->toDateTimeString();
+        } else if ($time_limit == "1:00:00") {
+            $carbon_hourStr = Carbon::now()->addHours(1)->toDateTimeString();
+        } else {
+            $carbon_hourStr = Carbon::now()->addHours(96)->toDateTimeString();
+        }
+
+        $custom_temptest = TempTest::create([
+            'title' => 'Retry Test A#' . ($attemptCount + 1) . " " . $finaltest->updated_at
+        ]);
+
+        foreach ($shuffledQuestions as $index => $question) {
+            $custom_temptest->questions()->attach($question->id, ['ques_order' => $index]);
+        }
+
+        foreach ($categories as $category_id) {
+            $custom_temptest->categories()->attach($category_id);
+        }
+
+        $finaltest = FinalTest::create([
+            'temptest_id' => $custom_temptest->id,
+            'status' => 'pending',
+            'is_graded' => false,
+            'end_time' => $carbon_hourStr,
+            'score' => 0,
+            'current_ques' => 0,
+        ]);
+
+        return redirect()->route('exam.home');
+    }
 }

@@ -12,6 +12,7 @@ class TempTest extends Model
     protected $table = 'temptests';
 
     protected $fillable = [
+        'id',
         'title'
     ];
 
