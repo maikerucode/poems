@@ -26,6 +26,7 @@
                     <!-- <button type="submit" class="p-2.5 ms-2 text-sm font-medium text-white bg-pink-500 rounded-lg border border-pink-500 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 w-15 h-10">Review Answers</button> -->
                     <!-- <button type="submit" class="p-2.5 ms-2 text-sm font-medium text-white bg-pink-500 rounded-lg border border-pink-500 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 w-15 h-10">Retry</button> -->
                      <form action="{{ route('exam.testRetry', [$finaltest->id]) }}" type="GET">
+                        <input type="hidden" name="time_limit" id="selectedTimeLimit">
                         <button id="dropdownDefaultButton" data-dropdown-toggle="dropdown" class="text-black bg-pink-300 hover:bg-pink-300 focus:ring-4 focus:outline-none focus:ring-pink-500 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center my-2 h-10" type="button">
                             <span id="selectedTime">Select Time Limit</span>     
                         <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
@@ -59,5 +60,23 @@
         </ul>
     </div>
 </div>
+
+<script>
+    const dropdownItems = document.querySelectorAll(".drop-option");
+
+    dropdownItems.forEach(item => {
+        item.addEventListener("click", function() {
+            const selectedValue = this.getAttribute('value'); // Use getAttribute() to retrieve the value
+            console.log("Selected Value:", selectedValue);
+
+            document.getElementById("selectedTime").innerText = selectedValue;
+            document.getElementById("selectedTimeLimit").value = selectedValue;
+
+            // Close the dropdown
+            const dropdown = document.getElementById("dropdown");
+            dropdown.classList.add("hidden");
+        });
+    });
+</script>
 
 @endsection
