@@ -9,7 +9,7 @@
                 <p class="text-left text-gray-400">{{$remaining_days}} days until Board Exam Day 1</p>
                 <div class="p-4 my-1.5 card-body rounded-lg bg-pink-200 drop-shadow-md">
                     <h1 class="text-3xl font-bold text-left mx-1">What to do today?</h1>
-                    <div class="flex my-1 h-[600px]">
+                    <div class="flex my-1">
                         <div class=" flex flex-col w-1/2 m-1 my-1 py-1 px-4 card-body rounded-lg bg-pink-100 drop-shadow-md">
                             <div class="flex">
                                 <p class="text-left text-lg font-bold">Practice Tests</p>
@@ -27,7 +27,18 @@
                                                         <input type="checkbox" name="categories[]" value="{{ $category->id }}">
                                                     </td>
                                                     <td class="flex-grow py-2 px-2 cursor-default select-none">
-                                                        {{$category->category_name}}
+                                                    @php
+                                                    
+                                                    $categoryCount = DB::table('questions')
+                                                        ->where('category_id', $category->id)
+                                                        ->count();
+
+                                                    @endphp
+
+                                                    {{$category->category_name}} 
+                                                        <span class="text-gray-500">
+                                                            ({{$categoryCount}})
+                                                        </span>
                                                     </td>
                                                 </tr>
                                                 @endforeach
