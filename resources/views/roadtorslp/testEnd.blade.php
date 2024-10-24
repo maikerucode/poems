@@ -6,7 +6,7 @@
     <div class="card">
         <div class="p-4 card-body w-1/2">
             <h1 class="text-4xl font-bold text-left">Good Work!</h1>
-            <p class="text-lg text-left align-text-bottom italic text-gray-400">finished in {{ $finish_time->diff($end_time) }}</p>
+            <p class="text-lg text-left align-text-bottom italic text-gray-400">finished in {{  $start_time->diff($finish_time) }}</p>
             <div class="p-4 my-1 card-body rounded-lg bg-pink-200 drop-shadow-md items-center">
                 <div class="m-2 mb-2 px-4 py-2 card-body rounded-lg bg-pink-100 drop-shadow-md">
                     <div class="flex justify-between">

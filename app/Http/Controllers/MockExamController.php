@@ -182,6 +182,7 @@ class MockExamController extends Controller
         return view('roadtorslp.testEnd',
             [
                 'finaltest' => $finaltest,
+                'start_time' => $finaltest->created_at,
                 'finish_time' => $finaltest->updated_at,
                 'end_time' => $finaltest->end_time,
                 'total_items' => $question_count,
