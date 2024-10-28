@@ -47,9 +47,18 @@
                     <h1 class="text-xl font-bold text-left"> {{ str_replace('|', "\n", $question->ques_body) }} </h1>
                 </div>
                 <div class="my-5 grid grid-cols-2 gap-4">
-                    @foreach ($question->answers as $answer)
-                        <div id="ans_{{ $answer->id }}" class="text-md font-bold card-body rounded-lg bg-white border border-purple-600 text-purple-600 cursor-pointer">{{ $answer->answer_text }}</div>
-                    @endforeach                    
+                @foreach ($question->answers as $answer)
+                    <div id="ans_{{ $answer->id }}" class="text-md font-bold card-body rounded-lg bg-white border border-purple-600 text-purple-600 cursor-pointer">
+                        @if (!preg_match('/^[A-E]\./', $answer->answer_text))
+                            @php
+                                $letter = chr(65 + $loop->index); // Convert index to letter (A, B, C, ...)
+                            @endphp
+                            {{ $letter }}. {{ $answer->answer_text }}
+                        @else
+                            {{ $answer->answer_text }}
+                        @endif
+                    </div>
+                @endforeach                  
                 </div>
                 <div class="mt-4 card-body rounded-lg flex justify-end">
                     <button class="confirm-ans p-2.5 ms-2 text-sm font-medium text-white bg-pink-500 rounded-lg border border-pink-500 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 w-15 h-10">Confirm</button>

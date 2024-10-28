@@ -13,9 +13,18 @@
                     <h1 class="text-xl font-bold text-left"> {{ str_replace('|', "\n", $question->ques_body) }} </h1>
                 </div>
                 <div class="my-5 grid grid-cols-2 gap-4">
-                    @foreach ($question->answers as $answer)
-                        <div id="{{ $answer->id }}" class="text-md font-bold card-body rounded-lg bg-white border border-purple-600 text-purple-600 cursor-pointer">{{ $answer->answer_text }} ({{ $answer->id }})</div>
-                    @endforeach                    
+                @foreach ($question->answers as $answer)
+                    <div id="{{ $answer->id }}" class="text-md font-bold card-body rounded-lg bg-white border border-purple-600 text-purple-600 cursor-pointer">
+                        @if (!preg_match('/^[A-E]\./', $answer->answer_text))
+                            @php
+                                $letter = chr(65 + $loop->index); // Convert index to letter (A, B, C, ...)
+                            @endphp
+                            {{ $letter }}. {{ $answer->answer_text }}
+                        @else
+                            {{ $answer->answer_text }}
+                        @endif
+                    </div>
+                @endforeach                       
                 </div>
             </div>
         </div>
