@@ -42,7 +42,7 @@ Route::resource('poems', PoemController::class)
     ->only(['index', 'store', 'edit', 'update', 'destroy'])
     ->middleware(['auth', 'verified']);
 
-Route::get('/home', [PoemController::class, 'home'])
+Route::get('/home', [PoemController::class, 'newPoemView'])
     ->name('home')
     ->middleware(['auth', 'verified']);
 

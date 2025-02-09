@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\View\View;
+use DB;
 
 class PoemController extends Controller
 {
@@ -153,5 +154,26 @@ class PoemController extends Controller
         $poem->delete();
 
         return redirect(route('poems.index'));
+    }
+
+    public function newPoemView(Request $request) {
+        $poems = DB::table('poems')
+            ->leftJoin('poem_tag', 'poems.id', '=', 'poem_tag.poem_id')
+            ->leftJoin('tags', 'poem_tag.tag_id', '=', 'tags.id')
+            ->select(
+                'poems.title',
+                'poems.poem_proper',
+                'poems.created_at',
+                DB::raw("JSON_ARRAYAGG(CONCAT(tags.name, '//')) AS tags_list")
+            )
+            ->groupBy('poems.title', 'poems.poem_proper', 'poems.created_at')
+            ->orderBy('poems.created_at', 'desc')
+            ->get();
+
+            // dd($poems);
+
+            return view('poems.new_poem_view', [
+                'poems' => $poems
+            ]);
     }
 }
